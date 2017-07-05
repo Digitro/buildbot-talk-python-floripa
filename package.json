@@ -1,0 +1,9 @@
+{
+	"project": "bb-talk",
+	"description": "Buildbot talk for Python Floripa",
+	"repository": "git@github.com:jhonatandarosa/bb-talk.git",
+	"license": "MIT",
+	"dependencies": {
+		
+	}
+}
