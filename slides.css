@@ -1,0 +1,9 @@
+.slide {
+	display: flex;
+	height: 100%;
+}
+
+
+.slide .content {
+	flex: 1;
+}
