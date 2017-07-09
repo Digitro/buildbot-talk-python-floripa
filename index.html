@@ -1,255 +1,270 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Buildbot</title>
+    <title>Buildbot</title>
 
-		<link rel="stylesheet" href="reveal/css/reveal.css">
-		<link rel="stylesheet" href="reveal/css/theme/black.css">
+    <link rel="stylesheet" href="reveal/css/reveal.css">
+    <link rel="stylesheet" href="reveal/css/theme/simple.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
 
-		<!-- TOC-Progress plugin -->
-		<link rel="stylesheet" href="reveal/plugin/toc-progress/toc-progress.css">
+    <!-- TOC-Progress plugin -->
+    <link rel="stylesheet" href="reveal/plugin/toc-progress/toc-progress.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			const link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
+    <!-- Printing and PDF exports -->
+    <script>
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
 
-		<script src="reveal/lib/js/head.min.js"></script>
-		<script src="reveal/js/reveal.js"></script>
+    <script src="reveal/lib/js/head.min.js"></script>
+    <script src="reveal/js/reveal.js"></script>
 
-		<script>
-			function init() {
-				// More info about config & dependencies:
-				// - https://github.com/hakimel/reveal.js#configuration
-				// - https://github.com/hakimel/reveal.js#dependencies
-				Reveal.initialize({
-					controls: true,
-					progress: true,
-					history: true,
-					center: true,
-					theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-					transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
-					// Parallax scrolling
-					// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-					// parallaxBackgroundSize: '2100px 900px',
-					// Optional libraries used to extend on reveal.js
-					dependencies: [
-						//{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-						{ src: 'reveal/plugin/markdown/marked.js' },
-						{ src: 'reveal/plugin/markdown/markdown.js' },
-						{ src: 'reveal/plugin/notes/notes.js', async: true },
-						{ 
-							src: 'reveal/plugin/highlight/highlight.js', 
-							async: true, 
-							callback: () => { 
-								hljs.initHighlightingOnLoad(); 
-							} 
-						},
-						// TOC-Progress plugin
-						{ 
-							src: 'reveal/plugin/toc-progress/toc-progress.js', 
-							async: true, 
-							callback: () => { 
-								toc_progress.initialize(); 
-								toc_progress.create(); 
-							}
-						}
-					]
-				});
-			}
-		</script>
+    <script>
+        function init() {
+            // More info about config & dependencies:
+            // - https://github.com/hakimel/reveal.js#configuration
+            // - https://github.com/hakimel/reveal.js#dependencies
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+                // Parallax scrolling
+                // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                // parallaxBackgroundSize: '2100px 900px',
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    //{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    {src: 'reveal/plugin/markdown/marked.js'},
+                    {src: 'reveal/plugin/markdown/markdown.js'},
+                    {src: 'reveal/plugin/notes/notes.js', async: true},
+                    {
+                        src: 'reveal/plugin/highlight/highlight.js',
+                        async: true,
+                        callback: () => {
+                            hljs.initHighlightingOnLoad();
+                        }
+                    },
+                    // TOC-Progress plugin
+                    {
+                        src: 'reveal/plugin/toc-progress/toc-progress.js',
+                        async: true,
+                        callback: () => {
+                            toc_progress.initialize();
+                            toc_progress.create();
+                        }
+                    }
+                ]
+            });
+        }
+    </script>
 
-		<link rel="stylesheet" href="slides.css">
-	</head>
-	<body onload="init()">
-		<div class="reveal">
-			<div class="slides">
-				
-
-			<section data-state="no-toc-progress">
-				<h1 class="no-toc-progress">Builds automatizados com <i>Buildbot</i></h1>
-				<h3></h3>
-				<p>
-					<small>Jhonatan da Rosa @ Dígitro</small>
-				</p>
-			</section>
-
-			<section data-state="no-toc-progress" class="slide">
-				<h1 class="no-toc-progress">Agenda</h1>
-				<div class="content">
-					<ul>
-						<li>Buildbot: O que é? Pra que serve?</li>
-						<li>Alternativas</li>
-						<li>Problema</li>
-						<li>Abordagem</li>
-					</ul>
-				</div>
-			</section>
+    <link rel="stylesheet" href="slides.css">
+</head>
+<body onload="init()">
+<div class="reveal">
+    <div class="slides">
 
 
-	<section>
+        <section data-state="no-toc-progress">
+            <h1 class="no-toc-progress">Continuous Integration with <i>Buildbot</i></h1>
+            <h3></h3>
+            <p>
+                <small>Jhonatan da Rosa @ Dígitro Tecnologia</small>
+            </p>
+        </section>
 
-		<section>
-			<h2>Description</h2>
-		</section>
+        <section data-state="no-toc-progress" class="slide">
+            <h1 class="no-toc-progress">Agenda</h1>
+            <div class="content">
+                <ul>
+                    <li>Continuous Integration/Delivery</li>
+                    <li>Problem</li>
+                    <li>Buildbot</li>
+                    <li>Approach</li>
+                </ul>
+            </div>
+        </section>
 
-		<section>
-			<h3>What is Reveal.js-TOC-Progress?</h3>
-			<p>Reveal.js-TOC-Progress is a plugin for the Reveal.js framework for HTML presentations (<a href="https://github.com/hakimel/reveal.js">https://github.com/hakimel/reveal.js</a>).</p>
-		</section>
+        <!-- CI/CD -->
 
-		<section>
-			<h3>What does Reveal.js-TOC-Progress do?</h3>
-			<p>Reveal.js-TOC-Progress includes a footer in all the slides of a Reveal.js presentation (with optional exclusion of some slides) that will show the progress in relation to the table of contents, in a similar way as in a LaTeX-Beamer presentation.</p>
-		</section>
+        <section>
+            <section>
+                <h2>Continuous Integration/Delivery</h2>
+            </section>
+            <section>
+                <h3>Continuous Integration</h3>
+                <div class="content">
+                    <blockquote style="font-size: 2rem;">Continuous Integration (CI) is a development practice that
+                        requires
+                        developers to
+                        integrate
+                        code into a shared repository several times a day. Each check-in is then verified by an
+                        automated
+                        build, allowing teams to detect problems early.
+                        <br/>
+                        By integrating regularly, you can detect errors quickly, and locate them more easily.
+                    </blockquote>
+                    <a href="https://www.thoughtworks.com/continuous-integration">ThoughtWorks</a>
+                </div>
+            </section>
+            <section>
+                <h3>Continuous Delivery</h3>
+                <div class="content">
+                    <blockquote style="font-size: 2rem;">Continuous Delivery (CD) is the natural extension of Continuous
+                        Integration, an approach in which
+                        teams ensure that every change to the system is releasable, and release any version with the
+                        push of
+                        a button. Continuous Delivery aims to make releases boring, so that we can deliver frequently
+                        and
+                        get quick feedback on what users care about.
+                    </blockquote>
+                    <a href="https://www.thoughtworks.com/continuous-delivery">ThoughtWorks</a>
+                </div>
+            </section>
+            <section>
+                <h3></h3>
+                <div class="content">
+                        <p>Faster deliveries</p>
+                        <p>↓ bugs</p>
+                        <p>↑ quality</p>
+                </div>
+            </section>
+        </section>
 
-		<section>
-			<h3>Example</h3>
-			<p>You can see it working at the bottom of this slide and any other slide except the title.</p>
-		</section>
+        <!-- Problem -->
 
-		<section>
-			<h3>Behaviour</h3>
-			<p>The footer has two columns. The left column shows a list of the main sections (except those we explicitly tell to ignore), highlighting the section we are now in. The right column shows the subsections of the main section we are now in (again with the option of ignoring those we do not want to show), highlighting the subsection we are currently at.</p>
-		</section>
+        <section>
 
-		<section>
-			<h3>Configurable options</h3>
-			<p>The behaviour for too long section or subsection lists is configurable. The font of the text can be reduced to make the list fit in the footer, or the list will scroll when necessary.</p>
-		</section>
+            <section>
+                <h2>Nice, but how?</h2>
+                <div class="content">
+                </div>
+            </section>
 
-		<section>
-			<p>The background color of the footer is also configurable.</p>
-		</section>
+            <section>
+                <h3>Requirements</h3>
+                <div class="content">
+                    <ul>
+                        <li>2 NodeJS server</li>
+                        <li>C++/Qt Client
+                            <ul>
+                                <li>Different deps version</li>
+                                <li>Multiple OS
+                                    <ul>
+                                        <li>Windows 7+</li>
+                                        <li>Ubuntu 14</li>
+                                        <li>CentOS 7</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </section>
 
-	</section>
+        </section>
 
-	<section>
+        <!-- Buildbot -->
 
-		<section>
-			<h2>Installation</h2>
-		</section>
-
-		<section>
-			<h3>Necessary files</h3>
-			<p>The <code>toc-progress</code> folder of the <code>plugin</code> folder has to be copied to the <code>plugin</code> folder of the Reveal.js presentation.</p>
-		</section>
-
-		<section>
-			<h3>CSS</h3>
-			<p>The CSS of the Reveal.js-TOC-Progress plugin is included dynamically when it is initialized. However, if we configure the presentation not to include the Reveal.js-TOC-Progress footer in the first page, this will be shown until the CSS is loaded dynamically, causing an ugly effect. To avoid it, include the CSS in the header of the Reveal.js presentation, with this line:</p>
-			<pre><code><link rel="stylesheet" href="reveal/plugin/toc-progress/toc-progress.css"></code></pre>
-		</section>
-
-		<section>
-			<h3>Plugin initialization</h3>
-			<p>Include Reveal.js-TOC-Progress among the Reveal.js plugin initializations, like this:</p>
-			<pre><code>
-Reveal.initialize
-(
-    {
-        ...
-        dependencies:
-        [
-            ...
-            {
-                src: 'plugin/toc-progress/toc-progress.js',
-                async: true,
-                callback: function()
-                {
-                    toc_progress.initialize();
-                    toc_progress.create();
-                }
-            }
-        ]
-    }
-);
-			</code></pre>
-		</section>
-
-		<section>
-			<h3>Customization</h3>
-			<p>The <code>toc_progress.initialize</code> function can take two parameters:</p>
-			<ul>
-				<li><code>reducescroll</code>: if <code>'reduce'</code>, the font of the text of too long section or subsection lists is reduced to make the list fit in the footer; if <code>'scroll'</code> (default), the list will scroll when necessary.</li>
-				<li><code>background</code>: a string of the form <code>'rgba(0,255,0,0.1)'</code>, for the background colour of the footer.</li>
-			</ul>
-		</section>
-
-		<section>
-			<p>Including the <code>toc_progress.create</code> function in the Reveal.js initialization is not compulsory. If it is not included, the key <code>q</code> has to be pressed to create the footer.</p>
-		</section>
-
-		<section>
-			<p>For further customization (like making the footer a header, for example), arrange the <code>plugin/toc-progress/toc-progress.css</code> file accordingly.</p>
-		</section>
+        <section>
+            <section>
+                <h2><img src="imgs/buildbot-logo.png" class="title"/><span class="hidden">Buildbot</span></h2>
+                <div class="content">
+                </div>
+            </section>
+            <section>
+                <h3>What is it?</h3>
+                <div class="content">
+                    <small><em>A continuous integration tool which automates the compile/test cycle required to validate
+                        changes to the project code base.</em></small>
+                    <br/>
+                    <br/>
+                    <ul>
+                        <li>Automate compile/test cycle</li>
+                        <li>Pinpoint problems quickly</li>
+                        <li>Build on a variety of platforms</li>
+                        <li>etc</li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h3>System Archiecture</h3>
+                <div class="content">
+                    <img src="imgs/overview.svg"/>
+                </div>
+            </section>
+            <section>
+                <h3>System Archiecture</h3>
+                <div class="content">
+                    <img src="imgs/master.svg" height="450px"/>
+                </div>
+            </section>
+            <section>
+                <h3 class="hidden">The good, the bad, the ugly</h3>
+                <div class="content">
+                    <ul class="small-li">
+                        <div class="hr-sect">The good</div>
+                        <li>Versioned Pipeline</li>
+                        <li>Cloud Ready (latent workers)</li>
+                        <li>Easy</li>
+                        <li>Well documented</li>
+                        <li>Out of the box support for C++ and Multiple envs</li>
+                        <div class="hr-sect">the bad</div>
+                        <li>Must know python (not really bad ☺)</li>
+                        <div class="hr-sect">the ugly</div>
+                        <li>No GUI to config</li>
+                    </ul>
+                </div>
+            </section>
+        </section>
 
 
-	</section>
+        <!-- Approach -->
 
-	<section>
+        <section>
 
-		<section>
-			<h2>Use</h2>
-		</section>
+            <section>
+                <h2>How we did it</h2>
+            </section>
 
-		<section>
-			<h3>Titles</h3>
-			<p>The Reveal.js-TOC-Progress plugin works in the same manner as the Presentable plugin (<a href="http://fcfeibel.com/presentable">http://fcfeibel.com/presentable</a>). It takes the first <code>h1</code>, <code>h2</code> or <code>h3</code> tag from the slides as the titles for the table of contents. Main sections will be the titles of the first slide in each vertical section and secondary sections will be the rest of the titles.</p>
-		</section>
+            <section>
+                <h3></h3>
+                <ul>
+                    <li>Docker workers</li>
+                    <li>XenServer Plugin</li>
+                </ul>
+            </section>
 
-		<section>
-			<h3>Title exclusion</h3>
-			<p>A title will be excluded from the table of contents if we put a <code>class</code> attribute with a value of <code>no-toc-progress</code> to the title element or to the section.</p>
-		</section>
+            <section>
+                <h3>Structure</h3>
+                <p>Node Servers</p>
+                <img class="title" src="imgs/ci_node.png"/>
+                <p>C++/Qt Client</p>
+                <img class="title"  src="imgs/ci_cpp.png"/>
+            </section>
 
-		<section>
-			<h3>Exclusion from slides</h3>
-			<p>Likewise, the Reveal.js-TOC-Progress footer will not be shown in a slide if the corresponding section has a <code>data-state</code> attribute with a value of <code>no-toc-progress</code>.</p>
-		</section>
+        </section>
 
-		<section>
-			<h3>Optional deletion and recreation at any time</h3>
-			<p>Pressing the <code>q</code> key causes the Reveal.js-TOC-Progress footer to disappear. Pressing the <code>q</code> key again creates it again.</p>
-		</section>
 
-	</section>
-
-	<section>
-		<h2>Links</h2>
-		<ul>
-			<li>Source code on GitHub: <a href="https://github.com/e-gor/Reveal.js-TOC-Progress">https://github.com/e-gor/Reveal.js-TOC-Progress</a></li>
-			<li>Demo presentation with Reveal.js-TOC-Progress: <a href="http://e-gor.github.io/Reveal.js-TOC-Progress/demo">http://e-gor.github.io/Reveal.js-TOC-Progress/demo</a></li>
-		</ul>
-	</section>
-
-	<section>
-		<h2>License</h2>
-		<p>GPL v3 (<a href="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</a>).</p>
-	</section>
-
-	<section>
-
-		<section data-state="no-toc-progress">
-			<h1 class="no-toc-progress">Reveal.js-TOC-Progress</h1>
-			<h3>LaTeX Beamer-like progress indicator according to table of contents for Reveal.js HTML presentations</h3>
-			<p>
-				<small>Created by <a href="https://github.com/e-gor">Igor Leturia <em>e-gor</em></a> / <a href="http://twitter.com/ileturia">@ileturia</a> / <a href="http://eibar.org/blogak/e-gorblog">http://eibar.org/blogak/e-gorblog</a></small>
-			</p>
-		</section>
-
-	</section>
-			</div>
-		</div>
-	</body>
+        <section data-state="no-toc-progress">
+            <h1 class="no-toc-progress">Thank you!</h1>
+            <h3></h3>
+            <p>
+                <small>Jhonatan da Rosa @ Dígitro Tecnologia</small>
+            </p>
+        </section>
+    </div>
+</div>
+</body>
 </html>
