@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="reveal/css/theme/simple.css">
 
     <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+    <!--<link rel="stylesheet" href="reveal/lib/css/zenburn.css">-->
+    <link rel="stylesheet" href="highlightjs/styles/darcula.css">
+    <script src="highlightjs/highlight.pack.js"></script>
 
     <!-- TOC-Progress plugin -->
     <link rel="stylesheet" href="reveal/plugin/toc-progress/toc-progress.css">
@@ -71,7 +73,7 @@
 
     <link rel="stylesheet" href="slides.css">
 </head>
-<body onload="init()">
+<body>
 <div class="reveal">
     <div class="slides">
 
@@ -89,9 +91,9 @@
             <div class="content">
                 <ul>
                     <li>Continuous Integration/Delivery</li>
-                    <li>Problem</li>
+                    <li>The Challenge</li>
                     <li>Buildbot</li>
-                    <li>Approach</li>
+                    <li>How we did it</li>
                 </ul>
             </div>
         </section>
@@ -135,9 +137,9 @@
             <section>
                 <h3></h3>
                 <div class="content">
-                        <p>Faster deliveries</p>
-                        <p>↓ bugs</p>
-                        <p>↑ quality</p>
+                    <p>Faster deliveries</p>
+                    <p>↓ bugs</p>
+                    <p>↑ quality</p>
                 </div>
             </section>
         </section>
@@ -149,27 +151,33 @@
             <section>
                 <h2>Nice, but how?</h2>
                 <div class="content">
+
                 </div>
             </section>
 
             <section>
-                <h3>Requirements</h3>
+                <h3>The Challenge</h3>
                 <div class="content">
-                    <ul>
-                        <li>2 NodeJS server</li>
-                        <li>C++/Qt Client
-                            <ul>
-                                <li>Different deps version</li>
-                                <li>Multiple OS
-                                    <ul>
-                                        <li>Windows 7+</li>
-                                        <li>Ubuntu 14</li>
-                                        <li>CentOS 7</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <em>CI of a multi-platform software with parts written in different languages</em>
+                    <br/>
+                    <br/>
+                    <small>
+                        <ul>
+                            <li>2 NodeJS servers</li>
+                            <li>C++/Qt Client
+                                <ul>
+                                    <li>Different deps version</li>
+                                    <li>Multiple OS
+                                        <ul>
+                                            <li>Windows 7</li>
+                                            <li>Ubuntu 14</li>
+                                            <li>CentOS 7</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </small>
                 </div>
             </section>
 
@@ -199,17 +207,81 @@
                 </div>
             </section>
             <section>
-                <h3>System Archiecture</h3>
+                <h3>Architecture Overview</h3>
                 <div class="content">
                     <img src="imgs/overview.svg"/>
                 </div>
             </section>
+
             <section>
-                <h3>System Archiecture</h3>
+                <h3>Master Architecture</h3>
                 <div class="content">
                     <img src="imgs/master.svg" height="450px"/>
                 </div>
             </section>
+
+            <section>
+                <h3>PyLint Example</h3>
+
+                <pre>
+                    <code class="hljs python" data-trim data-noescape>
+                        from buildbot.plugins import *
+
+                        c = BuildmasterConfig = {}
+                        # Worker
+                        c['workers'] = [worker.Worker("example-worker", "pass")]
+
+                        # VCS Pollers
+                        c['change_source'].append(
+                            changes.GitPoller(
+                                'git://github.com/buildbot/pyflakes.git',
+                                workdir='gitpoller-workdir', branch='master',
+                                pollinterval=300
+                            )
+                        )
+
+                        # Schedulers
+                        c['schedulers'].append(
+                            schedulers.SingleBranchScheduler(
+                                name="all",
+                                change_filter=util.ChangeFilter(branch='master'),
+                                treeStableTimer=None,
+                                builderNames=["runtests"]
+                            )
+                        )
+                        c['schedulers'].append(
+                            schedulers.ForceScheduler(
+                                name="force",
+                                builderNames=["runtests"]
+                            )
+                        )
+
+                        factory = util.BuildFactory()
+
+                        # check out the source
+                        factory.addStep(
+                            steps.Git(
+                                repourl='git://github.com/buildbot/pyflakes.git',
+                                mode='incremental'
+                            )
+                        )
+
+                        # run pyflakes
+                        factory.addStep(
+                            steps.PyFlakes(command=["pyflakes", "src"])
+                        )
+
+                        c['builders'] = []
+                        c['builders'].append(
+                            util.BuilderConfig(
+                                name="runtests",
+                                workernames=["example-worker"],
+                                factory=factory
+                            )
+                        )
+                    </code></pre>
+            </section>
+
             <section>
                 <h3 class="hidden">The good, the bad, the ugly</h3>
                 <div class="content">
@@ -240,18 +312,69 @@
 
             <section>
                 <h3></h3>
-                <ul>
-                    <li>Docker workers</li>
-                    <li>XenServer Plugin</li>
-                </ul>
+                <div class="content">
+                    <ul>
+                        <li>Docker workers</li>
+                        <li>XenServer Plugin</li>
+                    </ul>
+                </div>
             </section>
 
             <section>
                 <h3>Structure</h3>
-                <p>Node Servers</p>
-                <img class="title" src="imgs/ci_node.png"/>
-                <p>C++/Qt Client</p>
-                <img class="title"  src="imgs/ci_cpp.png"/>
+                <div class="content">
+                    <p>Node Servers</p>
+                    <img class="title" src="imgs/ci_node.png"/>
+                    <p>C++/Qt Client</p>
+                    <img class="title" src="imgs/ci_cpp.png"/>
+                </div>
+            </section>
+
+            <section>
+                <h3>Stumbles (1/2)</h3>
+                <div class="content">
+
+                    <h4>Dynamic Parts</h4>
+                    <ul>
+                        <li>
+                            <code>util.Property</code>
+                        </li>
+                        <li>
+                            <code>util.Interpolate</code>
+                        </li>
+                        <li><code>IRenderable</code>
+                            <pre><code class="hljs python" data-trim data-noescape>
+                                @implementer(IRenderable)
+                                class Now(object):
+                                    def getRenderingFor(self, props):
+                                        return int(time.time())
+                            </code></pre>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Stumbles (2/2)</h3>
+                <div class="content">
+
+                    <h4>Deferrable Plugins</h4>
+                    <pre><code class="hljs python" data-trim data-noescape>
+                    @implementer(IRenderable)
+                    class IntPropertyCast(object):
+                        prop = None
+
+                        def __init__(self, prop):
+                            assert IRenderable.providedBy(prop)
+                            self.prop = prop
+
+                        @defer.inlineCallbacks
+                        def getRenderingFor(self, props):
+                            result = yield defer.maybeDeferred(self.prop.getRenderingFor, props)
+                            result = int(result)
+                            defer.returnValue(result)
+                    </code></pre>
+                </div>
             </section>
 
         </section>
@@ -266,5 +389,8 @@
         </section>
     </div>
 </div>
+<script>
+    init();
+</script>
 </body>
 </html>

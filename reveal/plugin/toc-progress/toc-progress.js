@@ -364,7 +364,7 @@ toc_progress.initialize=function(reducescroll,background)
 	// Link to the TOC-Progress CSS
 
 	var link=document.createElement("link");
-	link.href="plugin/toc-progress/toc-progress.css";
+	link.href="reveal/plugin/toc-progress/toc-progress.css";
 	link.type="text/css";
 	link.rel="stylesheet";
 	document.getElementsByTagName("head")[0].appendChild(link);
