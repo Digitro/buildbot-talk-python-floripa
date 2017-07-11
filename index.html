@@ -40,7 +40,7 @@
                 history: true,
                 center: true,
                 theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+                transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
                 // Parallax scrolling
                 // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
                 // parallaxBackgroundSize: '2100px 900px',
@@ -192,18 +192,53 @@
                 </div>
             </section>
             <section>
-                <h3>What is it?</h3>
+                <h3>What is?</h3>
                 <div class="content">
-                    <small><em>A continuous integration tool which automates the compile/test cycle required to validate
-                        changes to the project code base.</em></small>
+
+                        <blockquote>Buildbot is a framework in which <b>you</b> implement a system that matches <b>your
+                            workflow</b> and grows with your organization.
+                        </blockquote>
+                        <br/>
+                        <br/>
+                        <a href="http://buildbot.net">Buildbot</a>
+                </div>
+            </section>
+            <section>
+                <h3>What is it for?</h3>
+                <div class="content">
+                        <ul>
+                            <li>Automate aspects of the software development cycle:
+                                <em>Build, Test, Release, Deploy</em>
+                            </li>
+                            <li>Pinpoint problems quickly</li>
+                            <li>Build on a variety of platforms</li>
+                            <li>etc</li>
+                        </ul>
+                </div>
+            </section>
+            <section>
+                <h3>Who uses?</h3>
+                <div class="content">
+                    <img class="logo" src="imgs/logos/buildbot.png"/>
+                    <img class="logo" src="imgs/logos/python.png"/>
+                    <img class="logo" src="imgs/logos/webkit.png"/>
+                    <img class="logo" src="imgs/logos/chromium.svg"/>
+                    <img class="logo" src="imgs/logos/mongodb.png"/>
+                    <img class="logo" src="imgs/logos/gdb.png"/>
+                    <img class="logo" src="imgs/logos/wireshark.png"/>
+                    <img class="logo" src="imgs/logos/mozilla.jpg"/>
+                    <img class="logo" src="imgs/logos/llvm.png"/>
+                    <img class="logo" src="imgs/logos/svn.png"/>
+                    <img class="logo" src="imgs/logos/gnome.png"/>
+                    <img class="logo" src="imgs/logos/mariadb.png"/>
+                    <img class="logo" src="imgs/logos/sdl.png"/>
+
                     <br/>
+                    <small>
+                    ... and a lot of other open source projects
+                    </small>
                     <br/>
-                    <ul>
-                        <li>Automate compile/test cycle</li>
-                        <li>Pinpoint problems quickly</li>
-                        <li>Build on a variety of platforms</li>
-                        <li>etc</li>
-                    </ul>
+                    <small><a href="http://trac.buildbot.net/wiki/SuccessStories">Buildbot Sucess Stories</a></small>
                 </div>
             </section>
             <section>
@@ -292,6 +327,7 @@
                         <li>Easy</li>
                         <li>Well documented</li>
                         <li>Out of the box support for C++ and Multiple envs</li>
+                        <li>Rest API</li>
                         <div class="hr-sect">the bad</div>
                         <li>Must know python (not really bad ☺)</li>
                         <div class="hr-sect">the ugly</div>
@@ -308,20 +344,49 @@
 
             <section>
                 <h2>How we did it</h2>
-            </section>
-
-            <section>
-                <h3></h3>
                 <div class="content">
+                    <br/>
                     <ul>
                         <li>Docker workers</li>
                         <li>XenServer Plugin</li>
+                        <li>git submodules for multiple configs</li>
                     </ul>
                 </div>
             </section>
 
             <section>
-                <h3>Structure</h3>
+                <h3>Project structure</h3>
+                <div class="content">
+                    <img width="400px" src="imgs/dgt-buildbot.png">
+                </div>
+            </section>
+
+            <section>
+                <h3>AbstractLoader</h3>
+                <pre><code class="hljs python" data-trim data-noescape>
+                    class AbstractLoader:
+                        def __init__(self):
+                            from dgt.config import ConfigLoader
+                            self.workers_dir = ConfigLoader().workers_dir
+                            self.buildoutputs_dir = ConfigLoader().buildoutputs_dir
+                            pass
+
+                        def workers(self):
+                            return []
+
+                        def builders(self):
+                            return []
+
+                        def schedulers(self):
+                            return []
+
+                        def change_source(self):
+                            return []
+                </code></pre>
+            </section>
+
+            <section>
+                <h3>Builders & Workers</h3>
                 <div class="content">
                     <p>Node Servers</p>
                     <img class="title" src="imgs/ci_node.png"/>
@@ -358,7 +423,7 @@
                 <h3>Stumbles (2/2)</h3>
                 <div class="content">
 
-                    <h4>Deferrable Plugins</h4>
+                    <h4>Deferrable Things</h4>
                     <pre><code class="hljs python" data-trim data-noescape>
                     @implementer(IRenderable)
                     class IntPropertyCast(object):

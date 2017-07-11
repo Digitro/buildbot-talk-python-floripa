@@ -65,3 +65,18 @@ img.title {
         display: none;
     }
 }
+
+.dual-columns {
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    columns: 2;
+    list-style: disc inside;//this is important addition
+}
+
+.logo {
+    border: none !important;
+    box-shadow: none !important;
+    max-width: 140px !important;
+    max-height: 75px !important;
+    padding: 10px !important;
+}
