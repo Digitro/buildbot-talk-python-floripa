@@ -7,7 +7,8 @@
     <title>Buildbot</title>
 
     <link rel="stylesheet" href="reveal/css/reveal.css">
-    <link rel="stylesheet" href="reveal/css/theme/simple.css">
+    <!--<link rel="stylesheet" href="reveal/css/theme/simple.css">-->
+    <link rel="stylesheet" href="reveal/css/theme/source/digitro.css">
 
     <!-- Theme used for syntax highlighting of code -->
     <!--<link rel="stylesheet" href="reveal/lib/css/zenburn.css">-->
@@ -35,7 +36,7 @@
             // - https://github.com/hakimel/reveal.js#configuration
             // - https://github.com/hakimel/reveal.js#dependencies
             Reveal.initialize({
-                controls: true,
+                controls: false,
                 progress: true,
                 history: true,
                 center: true,
@@ -64,10 +65,18 @@
                         callback: () => {
                             toc_progress.initialize();
                             toc_progress.create();
+                            replaceFontWeights();
                         }
                     }
                 ]
             });
+        }
+
+        function replaceFontWeights() {
+            const style = document.querySelector('#toc-progress-style');
+            let content = style.textContent;
+            content = content.replace(new RegExp('font-weight: bold;', 'g'), 'color: #96A72C;\nfont-weight: normal;');
+            style.textContent = content;
         }
     </script>
 
@@ -82,11 +91,11 @@
             <h1 class="no-toc-progress">Continuous Integration with <i>Buildbot</i></h1>
             <h3></h3>
             <p>
-                <small>Jhonatan da Rosa @ Dígitro Tecnologia</small>
+                <small class="emphasis">Jhonatan da Rosa @ Dígitro Tecnologia</small>
             </p>
         </section>
 
-        <section data-state="no-toc-progress" class="slide">
+        <section class="slide">
             <h1 class="no-toc-progress">Agenda</h1>
             <div class="content">
                 <ul>
@@ -187,7 +196,7 @@
 
         <section>
             <section>
-                <h2><img src="imgs/buildbot-logo.png" class="title"/><span class="hidden">Buildbot</span></h2>
+                <h2><img src="imgs/logos/buildbot.png" class="title"/><span class="hidden">Buildbot</span></h2>
                 <div class="content">
                 </div>
             </section>
@@ -256,7 +265,7 @@
             </section>
 
             <section>
-                <h3>PyLint Example</h3>
+                <h3>PyFlakes Example</h3>
 
                 <pre>
                     <code class="hljs python" data-trim data-noescape>
@@ -322,7 +331,7 @@
                 <div class="content">
                     <ul class="small-li">
                         <div class="hr-sect">The good</div>
-                        <li>Versioned Pipeline</li>
+                        <li><b>Versioned Pipeline</b></li>
                         <li>Cloud Ready (latent workers)</li>
                         <li>Easy</li>
                         <li>Well documented</li>
