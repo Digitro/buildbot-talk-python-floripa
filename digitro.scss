@@ -6,21 +6,24 @@
  * reveal.js is Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
  */
 // Default mixins and settings -----------------
-@import "../template/mixins";
-@import "../template/settings";
+@import "reveal/css/theme/template/mixins";
+@import "reveal/css/theme/template/settings";
 // ---------------------------------------------
-// Include theme-specific fonts
-@import url(https://fonts.googleapis.com/css?family=News+Cycle:400,700);
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
 
+// Include theme-specific fonts
 @font-face {
   font-family: CronosDisplay;
-  src: url("../../../../fonts/Cronos Display.ttf");
+  src: url("fonts/Cronos Display.ttf");
 }
 
 @font-face {
   font-family: AvenirLTBook;
-  src: url("../../../../fonts/AvenirLTStd-Book.otf");
+  src: url("fonts/AvenirLTStd-Book.otf");
+}
+
+@font-face {
+  font-family: FontAwesome;
+  src: url("fonts/FontAwesome.otf");
 }
 
 // Override theme settings (see ../template/settings.scss)
@@ -42,13 +45,13 @@ section.has-dark-background {
 }
 
 // Theme template ------------------------------
-@import "../template/theme";
+@import "reveal/css/theme/template/theme";
 // ---------------------------------------------
 
 #toc-progress-footer {
   //background-color: rgba(99, 100, 102, 0.05) !important;
   background-color: #005288 !important;
-  background-image: url("../../../../imgs/digitro-logo.png") !important;
+  background-image: url("imgs/digitro-logo.png") !important;
   background-repeat: no-repeat !important;
   background-position: 10px center !important;
   background-size: auto 70% !important;
@@ -60,8 +63,18 @@ section.has-dark-background {
   a {
     color: inherit;
   }
+  a:after {
+    content: "";
+    display: none;
+  }
 }
 
 b, .emphasis {
   color: #96A72C;
+}
+
+a:after {
+  font-family: FontAwesome;
+  font-size: 70%;
+  content: " \f0c1";
 }
